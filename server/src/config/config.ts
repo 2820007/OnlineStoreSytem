@@ -3,5 +3,6 @@ config()
 
 
 export const envConfig={
-    port:process.env.PORT
+    port:process.env.PORT,
+    connectionString:process.env.DATA_BASE_URI
 }

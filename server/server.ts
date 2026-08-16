@@ -1,3 +1,5 @@
+import "reflect-metadata";
+
 import app from "./src/app";
 
 import { envConfig } from "./src/config/config";
