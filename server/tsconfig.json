@@ -3,9 +3,9 @@
     "rootDir": ".",
     "outDir": "./dist",
 
+    "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "target": "ESNext",
 
     "types": ["node"],
 
@@ -14,8 +14,11 @@
     "declarationMap": true,
 
     "strict": true,
-    "jsx": "react-jsx",
 
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
+    "esModuleInterop": true,
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "skipLibCheck": true
