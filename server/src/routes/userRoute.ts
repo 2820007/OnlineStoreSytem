@@ -9,7 +9,7 @@ const router:Router = express.Router()
 // router.get("/register",UserController.register)
 
 router.route("/register").post(errorHandler(UserController.register))
-// router.route("/login").post(errorHandler(UserController.login))
+router.route("/login").post(errorHandler(UserController.login))
 // router.route("/forgot-password").post( UserController.handleForgotPassword)
 // router.route("/verify-otp").post(UserController.verifyOtp)
 // router.route("/reset-password").post(UserController.resetPassword)
