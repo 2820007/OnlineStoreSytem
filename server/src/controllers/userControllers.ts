@@ -3,8 +3,8 @@ import User from "../database/models/userModel";
 import bcrypt from 'bcrypt'
 
 import generateToken from "../services/generateToken";
-// import generateOtp from "../services/generateOtp";
-// import sendMail from "../services/sendMail";
+import generateOtp from "../services/generateOtp";
+import sendMail from "../services/sendMail";
 // import findData from "../services/findData";
 // import sendResponse from "../services/sendResponse";
 // import checkOtpExpiration from "../services/checkOtpExpiration";
@@ -39,11 +39,11 @@ class UserController{
             password : bcrypt.hashSync(password,10), 
     
         })
-        // await sendMail({
-        //     to : email, 
-        //     subject : "Registration successfull on Digital Dokaan", 
-        //     text : "Welcome to Digital Dokaan, Thank you for registering"
-        // })
+        await sendMail({
+            to : email, 
+            subject : "Registration successfull on Online Store", 
+            text : "Welcome to Online Store, Thank you for registering"
+        })
 
         // await sequelize.query(`INSERT INTO users(id,username,email,password) VALUES (?,?,?,?)`, {
         //     replacements : ['b5a3f20d-6202-4159-abd9-0c33c6f70487', username,email,password], 
@@ -97,42 +97,45 @@ class UserController{
         }
 
     }
-    // static async handleForgotPassword(req:Request,res:Response){
+    static async handleForgotPassword(req:Request,res:Response){
        
-    //     const {email} = req.body 
-    //     if(!email){
-    //         res.status(400).json({message : "Please provide email"})
-    //         return
-    //     }
+        const {email} = req.body 
+        if(!email){
+            res.status(400).json({message : "Please provide email"})
+            return
+        }
         
-    //     // const [user] = await User.findAll({
-    //     //     where : {
-    //     //         email : email
-    //     //     }
-    //     // })
-    //     const user = await findData(User,email)
-    //     if(!user){
-    //          res.status(404).json({
-    //             email : "Email not registered"
-    //         })
-    //         return
-    //     }
-    //     // otp pathaunu paryo aba, generate otp, mail sent
-    //     const otp = generateOtp()
-    //     await sendMail({
-    //         to : email, 
-    //         subject : "Digital Dokaan Password Change Request", 
-    //         text : `You just request to reset password. Here is your otp, ${otp}`
-    //     })
-    //     user.otp = otp.toString()
-    //     user.otpGeneratedTime = Date.now().toString()
-    //     await user.save()
+        const [user] = await User.findAll({
+            where : {
+                email : email
+            }
+        })
 
-    //     res.status(200).json({
-    //         message : "Password Reset OTP sent!!!!"
-    //     })
 
-    // }
+        // const user = await findData(User,email)
+
+        if(!user){
+             res.status(404).json({
+                email : "Email not registered"
+            })
+            return
+        }
+        // otp pathaunu paryo aba, generate otp, mail sent
+        const otp = generateOtp()
+        await sendMail({
+            to : email, 
+            subject : "Online Store Password Change Request", 
+            text : `You just request to reset password. Here is your otp, ${otp}`
+        })
+        // user.otp = otp.toString()
+        // user.otpGeneratedTime = Date.now().toString()
+        // await user.save()
+
+        res.status(200).json({
+            message : "Password Reset OTP sent!!!!"
+        })
+
+    }
     // static async verifyOtp(req:Request,res:Response){
     //     const {otp,email} = req.body 
     //     if(!otp || !email){

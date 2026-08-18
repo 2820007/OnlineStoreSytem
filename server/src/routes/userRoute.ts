@@ -10,7 +10,7 @@ const router:Router = express.Router()
 
 router.route("/register").post(errorHandler(UserController.register))
 router.route("/login").post(errorHandler(UserController.login))
-// router.route("/forgot-password").post( UserController.handleForgotPassword)
+router.route("/forgot-password").post( UserController.handleForgotPassword)
 // router.route("/verify-otp").post(UserController.verifyOtp)
 // router.route("/reset-password").post(UserController.resetPassword)
 // router.route("/users").get(userMiddleware.isUserLoggedIn,userMiddleware.accessTo(Role.Admin), errorHandler( UserController.fetchUsers))
