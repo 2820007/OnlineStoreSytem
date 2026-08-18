@@ -7,6 +7,9 @@ export const envConfig={
     connectionString:process.env.DATA_BASE_URI,
     jwtSecret:process.env.JWT_SECRET_KEY,
     email:process.env.EMAIL,
-    emailPass:process.env.EMAIL_PASS
+    emailPass:process.env.EMAIL_PASS,
+    adminEmail:process.env.ADMIN_EMAIL,
+    adminPass:process.env.ADMIN_PASS,
+    adminUserName:process.env.ADMIN_USERNAME
     
 }
