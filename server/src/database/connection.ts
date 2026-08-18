@@ -2,10 +2,11 @@ import { Sequelize } from "sequelize-typescript";
 import { envConfig } from "../config/config";
 import User from "./models/userModel";
 import Product from "./models/productModel";
+import Category from "./models/categoryModel";
 
 export const sequelize = new Sequelize(envConfig.connectionString as string,
       {
-    models: [User,Product],
+    models: [User,Product,Category],
   }
 );
 
