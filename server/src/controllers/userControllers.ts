@@ -2,7 +2,7 @@ import type { Request, Response } from "express";
 import User from "../database/models/userModel";
 import bcrypt from 'bcrypt'
 
-// import generateToken from "../services/generateToken";
+import generateToken from "../services/generateToken";
 // import generateOtp from "../services/generateOtp";
 // import sendMail from "../services/sendMail";
 // import findData from "../services/findData";
@@ -51,6 +51,7 @@ class UserController{
 
         res.status(201).json({
             message : "User registered successfully", 
+            
     
         })
     }
@@ -87,10 +88,10 @@ class UserController{
                 })
             }else{
                 // if password milyo vane --> token generate(jwt)    
-            //   const token = generateToken(user.id)
+              const token = generateToken(user.id)
                 res.status(200).json({
                     message : "Logged in success 🥰", 
-                    // token
+                    token
                 })
        }
         }
