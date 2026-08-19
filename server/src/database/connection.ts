@@ -3,10 +3,13 @@ import { envConfig } from "../config/config";
 import User from "./models/userModel";
 import Product from "./models/productModel";
 import Category from "./models/categoryModel";
+import Order from "./models/orderModel";
+import OrderDetails from "./models/orderDetails";
+import Payment from "./models/paymentModel";
 
 export const sequelize = new Sequelize(envConfig.connectionString as string,
       {
-    models: [User,Product,Category],
+    models: [User,Product,Category,Order,OrderDetails,Payment],
   }
 );
 

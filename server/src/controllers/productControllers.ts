@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import Product from "../database/models/productModel";
 import Category from "../database/models/categoryModel";
+import { where } from "sequelize";
 
 
 class ProductController{
@@ -86,6 +87,79 @@ class ProductController{
             })
         }
     }
+
+
+    //update  product
+
+
+    async updateProduct(req: Request, res: Response): Promise<void> {
+  const { id } = req.params;
+
+  const {
+    productName,
+    productDescription,
+    productPrice,
+    productTotalStock,
+    discount,
+    categoryId,
+  } = req.body;
+
+  // Check if product exists
+  const product= await Product.findAll({
+    where:{
+        id:id
+    }
+  }
+    
+  );
+
+  if (product.length ===0) {
+    res.status(404).json({
+      message: "No product with that id",
+    });
+    return;
+  }
+
+  // Get new image only if uploaded
+  const filename = req.file
+    ? req.file.filename
+    :"https://weimaracademy.org/wp-content/uploads/2021/08/dummy-user.png"
+
+  // Update product
+  await Product.update(
+    {
+      productName,
+      productDescription,
+        
+      productPrice,
+      productTotalStock,
+       
+      discount,
+      categoryId: categoryId ,
+      productImage: filename,
+    },
+    {
+      where: {
+        id: id,
+      },
+    }
+  );
+
+  // Get updated product
+  const updatedProduct = await Product.findByPk(id as string, {
+    include: [
+      {
+        model: Category,
+        attributes: ["id", "categoryName"],
+      },
+    ],
+  });
+
+  res.status(200).json({
+    message: "Product updated successfully",
+    data: updatedProduct,
+  });
+}
 }
 
 export default new ProductController
