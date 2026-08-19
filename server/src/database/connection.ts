@@ -24,4 +24,15 @@ const connectDB = async () => {
 sequelize.sync({force:false, alter:false}).then(()=>{
   console.log("synced !!.")
 })
+
+
+
+//relationships
+
+Category.hasOne(Product,{foreignKey:'categoryId'})
+Product.belongsTo(Category,{foreignKey:'categoryId'})
+
+
+
+
 export default connectDB

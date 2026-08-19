@@ -78,7 +78,7 @@ class UserMiddleware {
 
       if (!roles.includes(userRole)) {
         res.status(403).json({
-          message: "You dont have permission haiii!!",
+          message: "You dont have permission !!",
         });
         return;
       }
@@ -87,5 +87,6 @@ class UserMiddleware {
     };
   }
 }
+
 
 export default new UserMiddleware();

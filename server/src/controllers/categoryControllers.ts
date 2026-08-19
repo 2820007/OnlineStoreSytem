@@ -2,6 +2,7 @@
 import Category from "../database/models/categoryModel";
 import type { Response, Request } from "express";
 
+
 class CategoryController {
   categoryData = [
     {
@@ -16,6 +17,10 @@ class CategoryController {
       categoryName: "Foods",
     },
   ];
+
+  
+
+  //add category
 
   async seedCategory(): Promise<void> {
     const datas = await Category.findAll();
