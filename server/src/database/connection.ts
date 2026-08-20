@@ -6,10 +6,11 @@ import Category from "./models/categoryModel";
 import Order from "./models/orderModel";
 import OrderDetails from "./models/orderDetails";
 import Payment from "./models/paymentModel";
+import Cart from "./models/cartModel";
 
 export const sequelize = new Sequelize(envConfig.connectionString as string,
       {
-    models: [User,Product,Category,Order,OrderDetails,Payment],
+    models: [User,Product,Category,Order,OrderDetails,Payment,Cart],
   }
 );
 
@@ -51,13 +52,13 @@ OrderDetails.belongsTo(Order,{foreignKey:'orderId'})
 Product.hasMany(OrderDetails,{foreignKey:'productId'})
 OrderDetails.belongsTo(Product,{foreignKey:'productId'})
 
-// // cart - user 
-// Cart.belongsTo(User,{foreignKey:"userId"})
-// User.hasOne(Cart,{foreignKey:"userId"})
+// cart - user 
+Cart.belongsTo(User,{foreignKey:"userId"})
+User.hasOne(Cart,{foreignKey:"userId"})
 
-// // cart - product 
-// Cart.belongsTo(Product,{foreignKey:"productId"})
-// Product.hasMany(Cart,{foreignKey:"productId"})
+// cart - product 
+Cart.belongsTo(Product,{foreignKey:"productId"})
+Product.hasMany(Cart,{foreignKey:"productId"})
 
 
 
