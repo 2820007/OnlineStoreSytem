@@ -26,10 +26,10 @@ class OrderWithPaymentId extends Order{
 class OrderController{
     static async createOrder(req:OrderRequest,res:Response):Promise<void>{
         const userId =  req.user?.id
-        const {phoneNumber,firstName,lastName, email, city,addressLine,state,zipCode, totalAmount,paymentMethod} = req.body 
+        const {phoneNumber,firstName,lastName, email, City,AddressLine,State,zipCode, totalAmount,paymentMethod} = req.body 
         const products:IProduct[] = req.body.products
         console.log(req.body)
-        if(!phoneNumber || !city || !addressLine || !state || !zipCode || !totalAmount || products.length == 0 || !firstName || !lastName || !email ){
+        if(!phoneNumber || !City || !AddressLine || !State || !zipCode || !totalAmount || products.length == 0 || !firstName || !lastName || !email ){
             res.status(400).json({
                 message : "Please provide phoneNumber,shippingAddress,totalAmount,products"
             })
@@ -44,10 +44,10 @@ class OrderController{
       })
       const orderData = await Order.create({
         phoneNumber, 
-        city, 
-        state, 
+        City, 
+        State, 
         zipCode, 
-        addressLine,
+        AddressLine,
         totalAmount, 
         userId, 
         firstName, 
@@ -85,7 +85,7 @@ class OrderController{
         }
        const response =  await axios.post("https://a.khalti.com/api/v2/epayment/initiate/",data,{
           headers : {
-            Authorization : "Key b71142e3f4fd4da8acccd01c8975be38"
+            Authorization : "Key 3b9c90a3e59b474c92b8f3953be4e493"
           }
         })
       const khaltiResponse = response.data 
@@ -120,7 +120,7 @@ class OrderController{
         pidx : pidx
       },{
         headers : {
-          "Authorization" : "Key b71142e3f4fd4da8acccd01c8975be38"
+          "Authorization" : "Key 3b9c90a3e59b474c92b8f3953be4e493"
         }
       })
       const data = response.data 
