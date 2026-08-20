@@ -35,6 +35,30 @@ sequelize.sync({force:false, alter:false}).then(()=>{
 Category.hasOne(Product,{foreignKey:'categoryId'})
 Product.belongsTo(Category,{foreignKey:'categoryId'})
 
+//User X Order
+
+Order.belongsTo(User,{foreignKey:"userId"})
+User.hasMany(Order,{foreignKey:"userId"})
+
+
+// Payment X Order 
+Payment.hasOne(Order,{foreignKey:'paymentId'})
+Order.belongsTo(Payment,{foreignKey:'paymentId'})
+
+Order.hasOne(OrderDetails,{foreignKey:'orderId'})
+OrderDetails.belongsTo(Order,{foreignKey:'orderId'})
+
+Product.hasMany(OrderDetails,{foreignKey:'productId'})
+OrderDetails.belongsTo(Product,{foreignKey:'productId'})
+
+// // cart - user 
+// Cart.belongsTo(User,{foreignKey:"userId"})
+// User.hasOne(Cart,{foreignKey:"userId"})
+
+// // cart - product 
+// Cart.belongsTo(Product,{foreignKey:"productId"})
+// Product.hasMany(Cart,{foreignKey:"productId"})
+
 
 
 
